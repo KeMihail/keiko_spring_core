@@ -8,7 +8,7 @@ import ua.epam.spring.hometask.domain.Event;
 /**
  * @author Yuriy_Tkach
  */
-public interface EventService extends AbstractDomainObjectService<Event> {
+public interface IEventService extends AbstractDomainObjectService<Event> {
 
     /**
      * Finding event by name
