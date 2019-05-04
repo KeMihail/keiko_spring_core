@@ -18,17 +18,17 @@ import ua.epam.spring.hometask.util.DomainMap;
 
 public class UserDao implements IUserDao
 {
-	private Map<Integer, User> userMap = new HashMap<>();
+	private Map<Long, User> userMap = DomainMap.getUserMap();
 
 	@Nullable
 	@Override
 	public Collection<User> getUserByEmail(@Nonnull final String email)
 	{
-		if (!DomainMap.getUserMap().isEmpty())
+		if (!userMap.isEmpty())
 		{
 			List<User> result = new ArrayList<>();
 
-			for (Map.Entry<Long, User> entry : DomainMap.getUserMap().entrySet())
+			for (Map.Entry<Long, User> entry : userMap.entrySet())
 			{
 				if (entry.getValue().getEmail().equals(email))
 				{
@@ -43,24 +43,24 @@ public class UserDao implements IUserDao
 	@Override
 	public DomainObject save(@Nonnull final DomainObject object)
 	{
-		DomainMap.getUserMap().put(object.getId(), (User) object);
+		userMap.put(object.getId(), (User) object);
 		return object;
 	}
 
 	@Override
 	public void remove(@Nonnull final DomainObject object)
 	{
-		DomainMap.getUserMap().remove(object.getId());
+		userMap.remove(object.getId());
 	}
 
 	@Override
 	public Collection<DomainObject> getById(@Nonnull final Long id)
 	{
-		if (!DomainMap.getUserMap().isEmpty())
+		if (!userMap.isEmpty())
 		{
 			List<DomainObject> result = new ArrayList<>();
 
-			for (Map.Entry<Long, User> entry : DomainMap.getUserMap().entrySet())
+			for (Map.Entry<Long, User> entry : userMap.entrySet())
 			{
 				if (entry.getKey().equals(id))
 				{
@@ -76,10 +76,10 @@ public class UserDao implements IUserDao
 	@Override
 	public Collection getAll()
 	{
-		if (!DomainMap.getUserMap().isEmpty())
+		if (!userMap.isEmpty())
 		{
 			List<User> list = new ArrayList<>();
-			for (User user : DomainMap.getUserMap().values())
+			for (User user : userMap.values())
 			{
 				list.add(user);
 			}
