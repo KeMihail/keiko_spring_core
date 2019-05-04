@@ -3,6 +3,7 @@ package ua.epam.spring.hometask.dao.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import ua.epam.spring.hometask.util.DomainMap;
 
 public class UserDao implements IUserDao
 {
-	private Map<Integer, User> userMap;
+	private Map<Integer, User> userMap = new HashMap<>();
 
 	@Nullable
 	@Override
@@ -77,7 +78,7 @@ public class UserDao implements IUserDao
 	{
 		if (!DomainMap.getUserMap().isEmpty())
 		{
-			List<User> list = null;
+			List<User> list = new ArrayList<>();
 			for (User user : DomainMap.getUserMap().values())
 			{
 				list.add(user);
