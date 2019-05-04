@@ -5,6 +5,9 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 
 import ua.epam.spring.hometask.domain.DomainObject;
+import ua.epam.spring.hometask.exceptions.AmbiguousIdentifierException;
+import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;
+
 
 /**
  * @author Yuriy_Tkach
@@ -38,7 +41,7 @@ public interface AbstractDomainObjectService<T extends DomainObject> {
      *            id of the object
      * @return Found object or <code>null</code>
      */
-    public T getById(@Nonnull Long id);
+    public T getById(@Nonnull Long id)throws UnknownIdentifierException, AmbiguousIdentifierException;
 
     /**
      * Getting all objects from storage
