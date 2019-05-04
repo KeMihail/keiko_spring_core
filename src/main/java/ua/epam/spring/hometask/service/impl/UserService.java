@@ -2,6 +2,7 @@ package ua.epam.spring.hometask.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -22,11 +23,11 @@ public class UserService implements IUserService
 
 	@Nullable
 	@Override
-	public User getUserByEmail(@Nonnull final String email) throws UnknownIdentifierException,AmbiguousIdentifierException
+	public User getUserByEmail(@Nonnull final String email) throws UnknownIdentifierException, AmbiguousIdentifierException
 	{
 		//final List<User> users = new ArrayList<>(dao.getUserByEmail(email));
 
-		ArrayList<User> users = dao.getUserByEmail(email).stream().collect(toCollection(ArrayList::new));
+		final ArrayList<User> users = dao.getUserByEmail(email).stream().collect(toCollection(ArrayList::new));
 
 		if (users.isEmpty())
 		{
@@ -35,7 +36,8 @@ public class UserService implements IUserService
 
 		if (users.size() > 1)
 		{
-			throw new AmbiguousIdentifierException("User with email '" + email + "  is not unique, " + users.size() + " users found!");
+			throw new AmbiguousIdentifierException(
+					"User with email '" + email + "  is not unique, " + users.size() + " users found!");
 		}
 
 		return users.get(0);
@@ -44,25 +46,41 @@ public class UserService implements IUserService
 	@Override
 	public User save(@Nonnull final User object)
 	{
-		return null;
+		dao.save(object);
+		return object;
 	}
 
 	@Override
 	public void remove(@Nonnull final User object)
 	{
-
+		dao.remove(object);
 	}
 
 	@Override
-	public User getById(@Nonnull final Long id)
+	public User getById(@Nonnull final Long id) throws UnknownIdentifierException, AmbiguousIdentifierException
 	{
-		return null;
+
+		//final ArrayList<User> users = dao.getById(id).stream().collect(toCollection(ArrayList::new));
+
+		final List<User> users = new ArrayList<>(dao.getById(id));
+
+		if (users.isEmpty())
+		{
+			throw new UnknownIdentifierException("User with id '" + id + " not found!");
+		}
+
+		if (users.size() > 1)
+		{
+			throw new AmbiguousIdentifierException("User with id '" + id + "  is not unique, " + users.size() + " users found!");
+		}
+
+		return users.get(0);
 	}
 
 	@Nonnull
 	@Override
 	public Collection<User> getAll()
 	{
-		return null;
+		return dao.getAll();
 	}
 }
