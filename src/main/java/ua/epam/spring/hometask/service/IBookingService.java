@@ -9,11 +9,15 @@ import javax.annotation.Nullable;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
+import ua.epam.spring.hometask.exceptions.AmbiguousIdentifierException;
+import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;
+
 
 /**
  * @author Yuriy_Tkach
  */
-public interface BookingService {
+public interface IBookingService
+{
 
     /**
      * Getting price when buying all supplied seats for particular event
@@ -40,7 +44,7 @@ public interface BookingService {
      * @param tickets
      *            Set of tickets
      */
-    public void bookTickets(@Nonnull Set<Ticket> tickets);
+    public void bookTickets(@Nonnull Set<Ticket> tickets) throws UnknownIdentifierException, AmbiguousIdentifierException;
 
     /**
      * Getting all purchased tickets for event on specific air date and time
