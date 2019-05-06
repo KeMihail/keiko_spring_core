@@ -14,6 +14,9 @@ public class DomainMap
 	private static Map<Long, Event> eventMap = new HashMap<>();
 	private Map<String, Auditorium> auditoriumMap = new HashMap<>();
 
+	public void setAuditoriumMap(Map<String, Auditorium> auditoriumMap) {
+		this.auditoriumMap = auditoriumMap;
+	}
 
 	public static Map<Long, User> getUserMap()
 	{
@@ -25,8 +28,7 @@ public class DomainMap
 		return eventMap;
 	}
 
-	public Map<String, Auditorium> getauditoriumMap()
-	{
+	public Map<String, Auditorium> getAuditoriumMap() {
 		return auditoriumMap;
 	}
 }
