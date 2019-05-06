@@ -32,44 +32,30 @@ public class TestEvent
 {
 
 	private Event event;
-	private IEventService service = new EventService();
-	private Map<Long, Event> eventMap = DomainMap.getEventMap();
-
-	private static final Long EVENT_ID = Long.valueOf(1);
-	private static final Double EVENT_PRICE = Double.valueOf(1.1);
-	private static final String EVENT_NAME = "aaa";
-	private static final EventRating EVENT_RATING = EventRating.HIGH;
-	private static final Long FAIL_ID = Long.valueOf(2);
-	private static final String FAIL_NAME = "bbb";
 
 	@Before
-	public void initEvent()
-	{
+	public void initEvent() {
 		event = new Event();
-		event.setId(EVENT_ID);
-		event.setBasePrice(EVENT_PRICE);
-		event.setName(EVENT_NAME);
-		event.setRating(EVENT_RATING);
+		event.setBasePrice(1.1);
+		event.setName("aaa");
+		event.setRating(EventRating.HIGH);
 
 		LocalDateTime now = LocalDateTime.now();
 
 		event.addAirDateTime(now);
 		event.addAirDateTime(now.plusDays(1));
 		event.addAirDateTime(now.plusDays(2));
-
-		eventMap.put(event.getId(), event);
 	}
 
 	@Test
-	public void testAddRemoveAirDates()
-	{
+	public void testAddRemoveAirDates() {
 		int size = event.getAirDates().size();
 
 		LocalDateTime date = LocalDateTime.now().plusDays(5);
 
 		event.addAirDateTime(date);
 
-		assertEquals(size + 1, event.getAirDates().size());
+		assertEquals(size+1, event.getAirDates().size());
 		assertTrue(event.getAirDates().contains(date));
 
 		event.removeAirDateTime(date);
@@ -79,8 +65,7 @@ public class TestEvent
 	}
 
 	@Test
-	public void testCheckAirDates()
-	{
+	public void testCheckAirDates() {
 		assertTrue(event.airsOnDate(LocalDate.now()));
 		assertTrue(event.airsOnDate(LocalDate.now().plusDays(1)));
 		assertFalse(event.airsOnDate(LocalDate.now().minusDays(10)));
@@ -98,8 +83,7 @@ public class TestEvent
 	}
 
 	@Test
-	public void testAddRemoveAuditoriums()
-	{
+	public void testAddRemoveAuditoriums() {
 		LocalDateTime time = event.getAirDates().first();
 
 		assertTrue(event.getAuditoriums().isEmpty());
@@ -114,8 +98,7 @@ public class TestEvent
 	}
 
 	@Test
-	public void testAddRemoveAuditoriumsWithAirDates()
-	{
+	public void testAddRemoveAuditoriumsWithAirDates() {
 		LocalDateTime time = LocalDateTime.now().plusDays(10);
 
 		assertTrue(event.getAuditoriums().isEmpty());
@@ -130,8 +113,7 @@ public class TestEvent
 	}
 
 	@Test
-	public void testNotAddAuditoriumWithoutCorrectDate()
-	{
+	public void testNotAddAuditoriumWithoutCorrectDate() {
 		LocalDateTime time = LocalDateTime.now().plusDays(10);
 
 		boolean result = event.assignAuditorium(time, new Auditorium());
@@ -143,62 +125,5 @@ public class TestEvent
 		assertFalse(result);
 
 		assertTrue(event.getAuditoriums().isEmpty());
-	}
-
-	public void testEventsFromDateRange(){
-		final List<Event> events = new ArrayList<>(service.getAll());
-
-		Assert.assertEquals(service.getForDateRange(LocalDateTime.now(),LocalDateTime.now().plusDays(3)).size(),Integer.valueOf(3),0);
-		Assert.assertEquals(service.getNextEvents(LocalDateTime.now().plusDays(1)).size(),Integer.valueOf(2),0);
-	}
-
-	@Test
-	public void testGrudMethods() throws UnknownIdentifierException, AmbiguousIdentifierException
-	{
-
-		final Event eventById = service.getById(event.getId());
-
-		Assert.assertNotNull(eventById);
-		Assert.assertEquals(event.getId(), eventById.getId());
-		Assert.assertEquals(event.getName(), eventById.getName());
-		Assert.assertEquals(event.getBasePrice(), eventById.getBasePrice(), 0.0);
-		Assert.assertEquals(event.getRating(), eventById.getRating());
-		Assert.assertEquals(event.getAirDates(), eventById.getAirDates());
-
-		final List<Event> eventsByName = service.getByName(event.getName()).stream().collect(toCollection(ArrayList::new));
-
-		Assert.assertNotNull(eventsByName);
-		Assert.assertTrue(eventsByName.size() == 1);
-		Assert.assertEquals(eventsByName.get(0).getId(), eventById.getId());
-		Assert.assertEquals(eventsByName.get(0).getName(), eventById.getName());
-		Assert.assertEquals(eventsByName.get(0).getBasePrice(), eventById.getBasePrice(), 0.0);
-		Assert.assertEquals(eventsByName.get(0).getRating(), eventById.getRating());
-		Assert.assertEquals(eventsByName.get(0).getAirDates(), eventById.getAirDates());
-
-		final List<Event> events = service.getAll().stream().collect(toCollection(ArrayList::new));
-
-		Assert.assertNotNull(events);
-		Assert.assertTrue(events.size() == 1);
-		Assert.assertTrue(events.contains(event));
-
-		service.remove(event);
-		Assert.assertTrue(service.getAll().stream().collect(toCollection(ArrayList::new)).isEmpty());
-	}
-
-	@Test(expected = UnknownIdentifierException.class)
-	public void failSearchById() throws UnknownIdentifierException, AmbiguousIdentifierException{
-		final Event event = service.getById(FAIL_ID);
-	}
-
-	@Test(expected = UnknownIdentifierException.class)
-	public void failSearchByName() throws UnknownIdentifierException, AmbiguousIdentifierException{
-		final Collection<Event> events = service.getByName(FAIL_NAME);
-	}
-
-	@After
-	public void cleaning(){
-		if (service.getAll().stream().collect(toCollection(ArrayList::new)).contains(event)){
-			service.remove(event);
-		}
 	}
 }

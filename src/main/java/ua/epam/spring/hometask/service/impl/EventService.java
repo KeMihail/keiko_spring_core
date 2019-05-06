@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.epam.spring.hometask.dao.IEventDao;
 import ua.epam.spring.hometask.dao.impl.EventDao;
 import ua.epam.spring.hometask.domain.Event;
@@ -20,7 +21,12 @@ import static java.util.stream.Collectors.toCollection;
 
 public class EventService implements IEventService
 {
+	@Autowired
 	IEventDao dao;
+
+	public void setDao(IEventDao dao) {
+		this.dao = dao;
+	}
 
 	@Nullable
 	@Override

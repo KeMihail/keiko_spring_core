@@ -21,6 +21,10 @@ public class UserService implements IUserService
 {
 	IUserDao dao;
 
+	public void setDao(IUserDao dao) {
+		this.dao = dao;
+	}
+
 	@Nullable
 	@Override
 	public User getUserByEmail(@Nonnull final String email) throws UnknownIdentifierException, AmbiguousIdentifierException

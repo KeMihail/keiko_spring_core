@@ -1,4 +1,4 @@
-package ua.epam.spring.hometask.domain;
+package ua.epam.spring.hometask.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.exceptions.AmbiguousIdentifierException;
 import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;
 import ua.epam.spring.hometask.service.IUserService;
@@ -19,8 +20,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static java.util.stream.Collectors.toCollection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/context.xml")
-public class TestUser
+@ContextConfiguration("classpath:context.xml")
+public class TestUserService
 {
 	private static final Long USER_ID = Long.valueOf(1);
 	private static final String USER_FIRST_NAME = "Mihail";

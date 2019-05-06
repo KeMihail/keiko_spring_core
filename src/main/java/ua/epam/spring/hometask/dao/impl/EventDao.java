@@ -1,5 +1,11 @@
 package ua.epam.spring.hometask.dao.impl;
 
+import ua.epam.spring.hometask.dao.IEventDao;
+import ua.epam.spring.hometask.domain.DomainObject;
+import ua.epam.spring.hometask.domain.Event;
+import ua.epam.spring.hometask.util.DomainMap;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,12 +15,6 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import ua.epam.spring.hometask.dao.IEventDao;
-import ua.epam.spring.hometask.domain.DomainObject;
-import ua.epam.spring.hometask.domain.Event;
-import ua.epam.spring.hometask.util.DomainMap;
-
 
 
 public class EventDao implements IEventDao
@@ -50,7 +50,7 @@ public class EventDao implements IEventDao
 
 		for (final Event event : events){
 			for (final LocalDateTime date : event.getAirDates()){
-				if (date.isAfter(from) && date.isBefore(to)){
+				if (date.isAfter(from.minusMinutes(1)) && date.isBefore(to.plusMinutes(1))){
 					result.add(event);
 				}
 			}
@@ -67,7 +67,7 @@ public class EventDao implements IEventDao
 
 		for (final Event event : events){
 			for (final LocalDateTime date : event.getAirDates()){
-				if (date.isAfter(LocalDateTime.now()) && date.isBefore(to)){
+				if (date.isAfter(LocalDateTime.now().minusMinutes(1)) && date.isBefore(to.plusMinutes(1))){
 					result.add(event);
 				}
 			}
