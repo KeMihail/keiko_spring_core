@@ -56,6 +56,8 @@ public class TestEvent
 		event.addAirDateTime(now);
 		event.addAirDateTime(now.plusDays(1));
 		event.addAirDateTime(now.plusDays(2));
+
+		eventMap.put(event.getId(), event);
 	}
 
 	@Test
@@ -143,11 +145,16 @@ public class TestEvent
 		assertTrue(event.getAuditoriums().isEmpty());
 	}
 
+	public void testEventsFromDateRange(){
+		final List<Event> events = new ArrayList<>(service.getAll());
+
+		Assert.assertEquals(service.getForDateRange(LocalDateTime.now(),LocalDateTime.now().plusDays(3)).size(),Integer.valueOf(3),0);
+		Assert.assertEquals(service.getNextEvents(LocalDateTime.now().plusDays(1)).size(),Integer.valueOf(2),0);
+	}
+
 	@Test
 	public void testGrudMethods() throws UnknownIdentifierException, AmbiguousIdentifierException
 	{
-
-		eventMap.put(event.getId(), event);
 
 		final Event eventById = service.getById(event.getId());
 

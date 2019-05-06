@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.service;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import javax.annotation.Nonnull;
@@ -44,5 +45,17 @@ public interface IEventService extends AbstractDomainObjectService<Event> {
      * @return Set of events
      */
     // public @Nonnull Set<Event> getNextEvents(@Nonnull LocalDateTime to);
+
+    public @Nonnull
+    Collection<Event> getForDateRange(@Nonnull LocalDateTime from, @Nonnull LocalDateTime to);
+
+    /**
+     * Finding next events by date
+     * @param to
+     * 		Date to
+     * @return returns events from now till the ‘to’ date
+     */
+    public @Nonnull
+    Collection<Event> getNextEvents(@Nonnull LocalDateTime to);
 
 }

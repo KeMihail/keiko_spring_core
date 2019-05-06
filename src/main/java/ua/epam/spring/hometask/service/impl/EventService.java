@@ -1,5 +1,6 @@
 package ua.epam.spring.hometask.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -35,6 +36,20 @@ public class EventService implements IEventService
 		}
 
 		return events;
+	}
+
+	@Nonnull
+	@Override
+	public Collection<Event> getForDateRange(@Nonnull final LocalDateTime from, @Nonnull final LocalDateTime to)
+	{
+		return dao.getForDateRange(from,to);
+	}
+
+	@Nonnull
+	@Override
+	public Collection<Event> getNextEvents(@Nonnull final LocalDateTime to)
+	{
+		return dao.getNextEvents(to);
 	}
 
 	@Override
