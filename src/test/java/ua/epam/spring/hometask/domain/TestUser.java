@@ -7,15 +7,19 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import ua.epam.spring.hometask.exceptions.AmbiguousIdentifierException;
 import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;
 import ua.epam.spring.hometask.service.IUserService;
-import ua.epam.spring.hometask.service.impl.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static java.util.stream.Collectors.toCollection;
 
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:/context.xml")
 public class TestUser
 {
 	private static final Long USER_ID = Long.valueOf(1);
@@ -25,7 +29,8 @@ public class TestUser
 	private static final Long FAIL_ID = Long.valueOf(2);
 	private static final String FAIL_EMAIL = "fail@epam.com";
 
-	private IUserService service = new UserService();
+	@Autowired
+	private IUserService service;
 	private User user;
 
 	@Before

@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.toCollection;
 
 public class EventService implements IEventService
 {
-	IEventDao dao = new EventDao();
+	IEventDao dao;
 
 	@Nullable
 	@Override

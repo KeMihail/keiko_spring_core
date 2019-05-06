@@ -1,6 +1,5 @@
 package ua.epam.spring.hometask.dao.impl;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +15,6 @@ import ua.epam.spring.hometask.domain.DomainObject;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.util.DomainMap;
 
-import static java.util.stream.Collectors.toCollection;
 
 
 public class EventDao implements IEventDao

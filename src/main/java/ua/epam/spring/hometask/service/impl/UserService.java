@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toCollection;
 
 public class UserService implements IUserService
 {
-	IUserDao dao = new UserDao();
+	IUserDao dao;
 
 	@Nullable
 	@Override
