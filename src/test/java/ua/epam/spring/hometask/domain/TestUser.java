@@ -40,7 +40,7 @@ public class TestUser
 	}
 
 	@Test
-	public void testCrudMethod() throws UnknownIdentifierException, AmbiguousIdentifierException
+	public void testCrudMethods() throws UnknownIdentifierException, AmbiguousIdentifierException
 	{
 
 		final User userById = service.getById(user.getId());
