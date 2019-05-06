@@ -8,11 +8,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import ua.epam.spring.hometask.dao.IEventDao;
-import ua.epam.spring.hometask.dao.IUserDao;
 import ua.epam.spring.hometask.dao.impl.EventDao;
-import ua.epam.spring.hometask.dao.impl.UserDao;
 import ua.epam.spring.hometask.domain.Event;
-import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.exceptions.AmbiguousIdentifierException;
 import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;
 import ua.epam.spring.hometask.service.IEventService;
@@ -28,16 +25,16 @@ public class EventService implements IEventService
 	@Override
 	public Collection<Event> getByName(@Nonnull final String name) throws UnknownIdentifierException
 	{
-		//final List<Event> users = new ArrayList<>(dao.getByName(name));
+		//final List<Event> events = new ArrayList<>(dao.getByName(name));
 
-		final ArrayList<Event> users = dao.getByName(name).stream().collect(toCollection(ArrayList::new));
+		final ArrayList<Event> events = dao.getByName(name).stream().collect(toCollection(ArrayList::new));
 
-		if (users.isEmpty())
+		if (events.isEmpty())
 		{
-			throw new UnknownIdentifierException("User with name '" + name + " not found!");
+			throw new UnknownIdentifierException("Event with name '" + name + " not found!");
 		}
 
-		return users;
+		return events;
 	}
 
 	@Override
@@ -56,21 +53,21 @@ public class EventService implements IEventService
 	@Override
 	public Event getById(@Nonnull final Long id) throws UnknownIdentifierException, AmbiguousIdentifierException
 	{
-		//final ArrayList<User> users = dao.getById(id).stream().collect(toCollection(ArrayList::new));
+		//final ArrayList<Event> events = dao.getById(id).stream().collect(toCollection(ArrayList::new));
 
-		final List<Event> users = new ArrayList<>(dao.getById(id));
+		final List<Event> events = new ArrayList<>(dao.getById(id));
 
-		if (users.isEmpty())
+		if (events.isEmpty())
 		{
-			throw new UnknownIdentifierException("User with id '" + id + " not found!");
+			throw new UnknownIdentifierException("Event with id '" + id + " not found!");
 		}
 
-		if (users.size() > 1)
+		if (events.size() > 1)
 		{
-			throw new AmbiguousIdentifierException("User with id '" + id + "  is not unique, " + users.size() + " users found!");
+			throw new AmbiguousIdentifierException("Event with id '" + id + "  is not unique, " + events.size() + " events found!");
 		}
 
-		return users.get(0);
+		return events.get(0);
 	}
 
 	@Nonnull
