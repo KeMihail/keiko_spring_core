@@ -50,7 +50,7 @@ public class EventDao implements IEventDao
 	@Override
 	public void remove(@Nonnull final DomainObject object)
 	{
-		eventMap.remove(object);
+		eventMap.remove(object.getId());
 	}
 
 	@Override
