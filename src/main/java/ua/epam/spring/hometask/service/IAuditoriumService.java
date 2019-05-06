@@ -10,7 +10,7 @@ import ua.epam.spring.hometask.domain.Auditorium;
 /**
  * @author Yuriy_Tkach
  */
-public interface AuditoriumService {
+public interface IAuditoriumService {
 
     /**
      * Getting all auditoriums from the system

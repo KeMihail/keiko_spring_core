@@ -3,6 +3,7 @@ package ua.epam.spring.hometask.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.User;
 
@@ -11,6 +12,8 @@ public class DomainMap
 {
 	private static Map<Long, User> userMap = new HashMap<>();
 	private static Map<Long, Event> eventMap = new HashMap<>();
+	private Map<String, Auditorium> auditoriumMap = new HashMap<>();
+
 
 	public static Map<Long, User> getUserMap()
 	{
@@ -20,5 +23,10 @@ public class DomainMap
 	public static Map<Long, Event> getEventMap()
 	{
 		return eventMap;
+	}
+
+	public Map<String, Auditorium> getauditoriumMap()
+	{
+		return auditoriumMap;
 	}
 }
