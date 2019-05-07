@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+ 		http://www.springframework.org/schema/util
+ 		http://www.springframework.org/schema/util/spring-util-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <import resource="context.xml"/>
+
+    <bean id="testEvent" class="ua.epam.spring.hometask.domain.Event">
+        <property name="name" value="kino"/>
+        <property name="basePrice" value="10.0"/>
+        <property name="rating" value="HIGH"/>
+      <!--  <property name="airDates" ref="testAirDates"/>-->
+    </bean>
+
+    <bean id="testUser" class="ua.epam.spring.hometask.domain.User">
+        <property name="id" value="2"/>
+        <property name="firstName" value="Mihail"/>
+        <property name="lastName" value="Keiko"/>
+        <property name="email" value="mihail@epam.com"/>
+    </bean>
+
+    <bean id="testTicket" class="ua.epam.spring.hometask.domain.Ticket">
+        <property name="user" ref="testUser"/>
+        <property name="event" ref="testEvent"/>
+        <property name="dateTime">
+            <bean class="java.time.LocalDateTime" factory-method="now"/>
+        </property>
+        <property name="seat" value="1"/>
+    </bean>
+
+</beans>

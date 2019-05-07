@@ -76,4 +76,8 @@
         <property name="auditoriumMap" value="#{domainMap.getAuditoriumMap()}"/>
     </bean>
 
+    <bean id="bookingService" class="ua.epam.spring.hometask.service.impl.BookingService">
+        <property name="userService" ref="userService"/>
+    </bean>
+
 </beans>

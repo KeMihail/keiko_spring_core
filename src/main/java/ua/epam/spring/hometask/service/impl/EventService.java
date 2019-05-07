@@ -21,7 +21,6 @@ import static java.util.stream.Collectors.toCollection;
 
 public class EventService implements IEventService
 {
-	@Autowired
 	IEventDao dao;
 
 	public void setDao(IEventDao dao) {
