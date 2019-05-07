@@ -20,7 +20,7 @@
     </bean>
 
     <bean id="testUser" class="ua.epam.spring.hometask.domain.User">
-        <property name="id" value="2"/>
+        <property name="id" value="1"/>
         <property name="firstName" value="Mihail"/>
         <property name="lastName" value="Keiko"/>
         <property name="email" value="mihail@epam.com"/>
