@@ -13,6 +13,7 @@
     <import resource="context.xml"/>
 
     <bean id="testEvent" class="ua.epam.spring.hometask.domain.Event">
+        <property name="id" value="1"/>
         <property name="name" value="kino"/>
         <property name="basePrice" value="10.0"/>
         <property name="rating" value="HIGH"/>

@@ -12,8 +12,12 @@
 
     <context:annotation-config/>
 
-    <bean id="eventDao" class="ua.epam.spring.hometask.dao.impl.EventDao"/>
-    <bean id="userDao" class="ua.epam.spring.hometask.dao.impl.UserDao"/>
+    <bean id="eventDao" class="ua.epam.spring.hometask.dao.impl.EventDao">
+        <property name="eventMap" value="#{domainMap.getEventMap()}"/>
+    </bean>
+    <bean id="userDao" class="ua.epam.spring.hometask.dao.impl.UserDao">
+    <property name="userMap" value="#{domainMap.getUserMap()}"/>
+</bean>
 
     <bean id="eventService" class="ua.epam.spring.hometask.service.impl.EventService">
         <property name="dao" ref="eventDao"/>

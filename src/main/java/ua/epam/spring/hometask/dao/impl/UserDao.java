@@ -18,7 +18,11 @@ import ua.epam.spring.hometask.util.DomainMap;
 
 public class UserDao implements IUserDao
 {
-	private Map<Long, User> userMap = DomainMap.getUserMap();
+	private Map<Long, User> userMap;
+
+	public void setUserMap(Map<Long, User> userMap) {
+		this.userMap = userMap;
+	}
 
 	@Nullable
 	@Override

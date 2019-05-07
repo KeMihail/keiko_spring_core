@@ -15,11 +15,16 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.Resource;
 
 
 public class EventDao implements IEventDao
 {
-	private Map<Long, Event> eventMap = DomainMap.getEventMap();
+	private Map<Long, Event> eventMap;
+
+	public void setEventMap(Map<Long, Event> eventMap) {
+		this.eventMap = eventMap;
+	}
 
 	@Nullable
 	@Override

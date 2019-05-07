@@ -15,6 +15,7 @@ import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;
 import ua.epam.spring.hometask.service.impl.EventService;
 import ua.epam.spring.hometask.util.DomainMap;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,29 +25,20 @@ import java.util.Map;
 import static java.util.stream.Collectors.toCollection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:context.xml")
+@ContextConfiguration("classpath:test.xml")
 public class TestEventService {
 
+    @Resource(name = "testEvent")
     private Event event;
     @Autowired
     private IEventService service;
-    private Map<Long, Event> eventMap = DomainMap.getEventMap();
 
-    private static final Long EVENT_ID = Long.valueOf(1);
-    private static final Double EVENT_PRICE = Double.valueOf(1.1);
-    private static final String EVENT_NAME = "aaa";
-    private static final EventRating EVENT_RATING = EventRating.HIGH;
     private static final Long FAIL_ID = Long.valueOf(2);
     private static final String FAIL_NAME = "bbb";
 
 
     @Before
     public void setUp() {
-        event = new Event();
-        event.setId(EVENT_ID);
-        event.setBasePrice(EVENT_PRICE);
-        event.setName(EVENT_NAME);
-        event.setRating(EVENT_RATING);
 
         LocalDateTime now = LocalDateTime.now();
 
@@ -54,7 +46,7 @@ public class TestEventService {
         event.addAirDateTime(now.plusDays(1));
         event.addAirDateTime(now.plusDays(2));
 
-        eventMap.put(event.getId(), event);
+        service.save(event);
     }
 
 
