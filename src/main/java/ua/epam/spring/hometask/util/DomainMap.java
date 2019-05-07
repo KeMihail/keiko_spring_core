@@ -12,7 +12,7 @@ public class DomainMap
 {
 	private static Map<Long, User> userMap = new HashMap<>();
 	private static Map<Long, Event> eventMap = new HashMap<>();
-	private Map<String, Auditorium> auditoriumMap = new HashMap<>();
+	private static Map<String, Auditorium> auditoriumMap = new HashMap<>();
 
 	public void setAuditoriumMap(Map<String, Auditorium> auditoriumMap) {
 		this.auditoriumMap = auditoriumMap;
@@ -28,7 +28,7 @@ public class DomainMap
 		return eventMap;
 	}
 
-	public Map<String, Auditorium> getAuditoriumMap() {
+	public static Map<String, Auditorium> getAuditoriumMap() {
 		return auditoriumMap;
 	}
 }
