@@ -27,6 +27,10 @@
         <property name="dao" ref="userDao"/>
     </bean>
 
+    <bean id="domainMap" class="ua.epam.spring.hometask.util.DomainMap">
+        <property name="auditoriumMap" ref="auditoriumsMap">
+        </property>
+    </bean>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -35,34 +39,48 @@
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true"/>
-        <!-- <property name="systemPropertiesMode">
-             <util:constant
-                     static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
-         </property>-->
     </bean>
+
+    <util:set id="vipSeatsRed">
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+    </util:set>
+
+    <util:set id="vipSeatsGreen">
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+        <value>5</value>
+    </util:set>
+
+    <util:set id="vipSeatsBlack">
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+        <value>5</value>
+        <value>6</value>
+    </util:set>
+
 
     <bean id="redAuditorium" class="ua.epam.spring.hometask.domain.Auditorium">
         <property name="name" value="${red_name}"/>
         <property name="numberOfSeats" value="${red_numberOfSeats}"/>
-        <property name="vipSeats">
-            <bean class="java.util.HashSet"/>
-        </property>
+        <property name="vipSeats" ref="vipSeatsRed"/>
     </bean>
 
     <bean id="greenAuditorium" class="ua.epam.spring.hometask.domain.Auditorium">
         <property name="name" value="${green_name}"/>
         <property name="numberOfSeats" value="${green_numberOfSeats}"/>
-        <property name="vipSeats">
-            <bean class="java.util.HashSet"/>
-        </property>
+        <property name="vipSeats" ref="vipSeatsGreen"/>
     </bean>
 
     <bean id="blackAuditorium" class="ua.epam.spring.hometask.domain.Auditorium">
         <property name="name" value="${black_name}"/>
         <property name="numberOfSeats" value="${black_numberOfSeats}"/>
-        <property name="vipSeats">
-            <bean class="java.util.HashSet"/>
-        </property>
+        <property name="vipSeats" ref="vipSeatsBlack"/>
     </bean>
 
     <util:map id="auditoriumsMap">
@@ -70,11 +88,6 @@
         <entry key="Green" value-ref="greenAuditorium"/>
         <entry key="Black" value-ref="blackAuditorium"/>
     </util:map>
-
-    <bean id="domainMap" class="ua.epam.spring.hometask.util.DomainMap">
-        <property name="auditoriumMap" ref="auditoriumsMap">
-        </property>
-    </bean>
 
     <bean id="auditoriumService" class="ua.epam.spring.hometask.service.impl.AuditoriumService">
         <property name="auditoriumMap" value="#{domainMap.getAuditoriumMap()}"/>
