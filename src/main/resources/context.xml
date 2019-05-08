@@ -10,6 +10,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
+    <import resource="discount.xml"/>
     <context:annotation-config/>
 
     <bean id="eventDao" class="ua.epam.spring.hometask.dao.impl.EventDao">
@@ -30,15 +31,6 @@
     <bean id="domainMap" class="ua.epam.spring.hometask.util.DomainMap">
         <property name="auditoriumMap" ref="auditoriumsMap">
         </property>
-    </bean>
-
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:auditoriums.properties</value>
-            </list>
-        </property>
-        <property name="ignoreResourceNotFound" value="true"/>
     </bean>
 
     <util:set id="vipSeatsRed">
@@ -95,6 +87,16 @@
 
     <bean id="bookingService" class="ua.epam.spring.hometask.service.impl.BookingService">
         <property name="userService" ref="userService"/>
+        <property name="strategies" ref="discountStrategies"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:auditoriums.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"/>
     </bean>
 
 </beans>

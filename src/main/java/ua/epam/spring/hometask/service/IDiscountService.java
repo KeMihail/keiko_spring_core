@@ -11,7 +11,7 @@ import ua.epam.spring.hometask.domain.User;
 /**
  * @author Yuriy_Tkach
  */
-public interface DiscountService {
+public interface IDiscountService {
 
     /**
      * Getting discount based on some rules for user that buys some number of
@@ -27,6 +27,6 @@ public interface DiscountService {
      *            Number of tickets that user buys
      * @return discount value from 0 to 100
      */
-    byte getDiscount(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime airDateTime, long numberOfTickets);
+    Double getDiscount(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime airDateTime, long numberOfTickets);
 
 }
