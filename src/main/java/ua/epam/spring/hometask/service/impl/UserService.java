@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import ua.epam.spring.hometask.dao.IUserDao;
-import ua.epam.spring.hometask.dao.impl.UserDao;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.exceptions.AmbiguousIdentifierException;
 import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;

@@ -16,7 +16,6 @@ import ua.epam.spring.hometask.exceptions.AmbiguousIdentifierException;
 import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;
 import ua.epam.spring.hometask.service.IBookingService;
 import ua.epam.spring.hometask.service.IDiscountService;
-import ua.epam.spring.hometask.service.IEventService;
 import ua.epam.spring.hometask.service.IUserService;
 
 

@@ -7,7 +7,6 @@ import ua.epam.spring.hometask.service.IDiscountService;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.time.LocalDateTime;
-import java.time.Month;
 
 public class BirthdayStrategy implements IDiscountService {
     private static final Integer DISCOUNT = Integer.valueOf(5);

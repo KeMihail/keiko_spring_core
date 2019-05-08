@@ -8,9 +8,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ua.epam.spring.hometask.dao.IEventDao;
-import ua.epam.spring.hometask.dao.impl.EventDao;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.exceptions.AmbiguousIdentifierException;
 import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;

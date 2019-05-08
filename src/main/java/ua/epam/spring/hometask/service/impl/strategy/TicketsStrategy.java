@@ -6,10 +6,7 @@ import ua.epam.spring.hometask.service.IDiscountService;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 
 public class TicketsStrategy implements IDiscountService {
 
