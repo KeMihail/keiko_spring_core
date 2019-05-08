@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
+import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.exceptions.AmbiguousIdentifierException;
 import ua.epam.spring.hometask.exceptions.UnknownIdentifierException;
 
@@ -47,6 +48,7 @@ public class TestBookingService {
 
     @Before
     public void setUp() {
+       final LocalDate birhday = LocalDate.of(1984, 7, 28);
         NavigableSet<LocalDateTime> dates = new TreeSet<>();
         dates.add(LocalDateTime.of(LocalDate.of(2019, 05, 8), LocalTime.of(14, 00, 00)));
         dates.add(LocalDateTime.of(LocalDate.of(2019, 05, 10), LocalTime.of(12, 00, 00)));
@@ -56,7 +58,6 @@ public class TestBookingService {
         seats = new HashSet<>();
         seats.add(Long.valueOf(1));
 
-
         date = LocalDateTime.of(LocalDate.of(2019, 05, 10), LocalTime.of(12, 00, 00));
 
         NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
@@ -64,15 +65,16 @@ public class TestBookingService {
         auditoriums.put(date,auditorium);
 
         event.setAuditoriums(auditoriums);
-
-        userService.save(ticket.getUser());
+        final User user = ticket.getUser();
+        user.setBirthday(birhday);
+        userService.save(user);
     }
 
     @Test
     public void testTicketsPrice() {
-        final Double result = service.getTicketsPrice(event, date, null, seats);
+        final Double result = service.getTicketsPrice(event, date, ticket.getUser(), seats);
 
-        Assert.assertEquals(12.0, result, 0.0);
+        Assert.assertEquals(17.0, result, 0.0);
     }
 
     @Test

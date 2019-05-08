@@ -39,7 +39,7 @@ public class TestDiscountService {
     @Before
     public void setUp() {
         birhday = LocalDate.of(1984, 7, 28);
-        eventDate = LocalDateTime.of(1984, 7, 28, 14, 00, 00);
+        eventDate = LocalDateTime.of(2019, 7, 28, 14, 00, 00);
         user.setBirthday(birhday);
     }
 
